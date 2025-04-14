@@ -1,6 +1,6 @@
 <?php
 require('../classes/productclass.php');
-include("./head.php");
+include("head.php");
 
         ?>
 <!-- Header Start -->
