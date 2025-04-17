@@ -79,6 +79,70 @@ class ProductFront extends ProductConfig
             exit();
         }
     }
+
+
+    function add_product(){
+        $name = $_POST['pname'];
+        $rating = $_POST['prating'];
+        $price = $_POST['pprice'];
+        $number = $_POST['pdno'];
+    
+        $imageName = $_FILES['pimage']['name'];
+        $imageTmpName = $_FILES['pimage']['tmp_name'];
+    
+        $destinationFolder = realpath(__DIR__ . "/../assets/products/") . "/";
+        $imagePath = $destinationFolder . basename($imageName);
+    
+        if ($_FILES['pimage']['error'] !== UPLOAD_ERR_OK) {
+            header("Location: add-product.php?status=upload_error");
+            exit;
+        }
+    
+        if (!is_uploaded_file($imageTmpName)) {
+            header("Location: add-product.php?status=tmp_fail");
+            exit;
+        }
+    
+        if (move_uploaded_file($imageTmpName, $imagePath)) {
+            $this->query = "INSERT INTO product(product_name, product_rating, product_price, product_number, product_image) 
+                            VALUES ('$name', '$rating', '$price', '$number', '$imageName')";
+            $this->setter();
+    
+            if ($this->isqueryrun) {
+                // Redirect to view-products if successful
+                header("Location: view-product.php?status=success");
+                exit;
+            } else {
+                // Redirect to add-product if DB insert fails
+                header("Location: add-product.php?status=db_error");
+                exit;
+            }
+        } else {
+            // Redirect if file move fails
+            header("Location: add-product.php?status=move_fail");
+            exit;
+        }
+    }
+
+    function get_all_products(){
+        $this->query = "SELECT * FROM product";
+        $this->setter();
+
+        $data = [];
+
+        if (mysqli_num_rows($this->isqueryrun) > 0) {
+            while ($row = mysqli_fetch_assoc($this->isqueryrun)) {
+                $data[] = $row;
+            }
+        }
+
+        return $data;
+    }
+    
+    
+    
+
+    
 }
 
 $productobj = new ProductFront();

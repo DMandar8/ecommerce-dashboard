@@ -19,30 +19,30 @@ include '../includes/scripts.php';
               <h5 class="card-title fw-semibold mb-4">Forms</h5>
               <div class="card ">
                 <div class="card-body">
-                  <form class="row">
+                  <form class="row" method="POST" action="./redirect.php" enctype="multipart/form-data">
                     <div class="mb-3 col-lg-6">
                       <label for="exampleInputEmail1" class="form-label">Product Name</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <input type="text" class="form-control" name="pname" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 col-lg-6">
                       <label for="exampleInputPassword1" class="form-label">Rating</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1">
+                      <input type="text" class="form-control" name="prating" id="exampleInputPassword1">
                     </div>
                     <div class="mb-3 col-lg-6">
                       <label for="exampleInputEmail1" class="form-label">Price</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <input type="text" class="form-control" name="pprice" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 col-lg-6">
                       <label for="exampleInputPassword1" class="form-label">Demand Number</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1">
+                      <input type="text" class="form-control" name="pdno" id="exampleInputPassword1">
                     </div>
                     <div class="mb-3 col-lg-6">
                         <label for="imageInput" class="form-label">Upload Image</label>
-                        <input type="file" class="form-control" id="imageInput" name="image">
+                        <input type="file" class="form-control" name="pimage" id="imageInput" name="image">
                     </div>
                                         
                     <div class="col-lg-12">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="add_product_btn">Submit</button>
                     </div>
                     
                   </form>
